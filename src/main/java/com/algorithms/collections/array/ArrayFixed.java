@@ -1,61 +1,82 @@
 package com.algorithms.collections.array;
 
-import com.algorithms.collections.option.None;
-import com.algorithms.collections.option.Option;
-import com.algorithms.collections.option.Some;
+import com.algorithms.controls.option.None;
+import com.algorithms.controls.option.Option;
+import com.algorithms.controls.option.Some;
 
 import java.util.function.Function;
 
-public class Array<T> implements ArrayLike<T> {
-    private T[] underlying;
+/*
+ * This array does not automatically grow in size.
+ */
+public class ArrayFixed<T> implements Array<T> {
+    private Object[] underlying;
 
     @SuppressWarnings("unchecked")
-    private Array(T[] inputs) {
-        this.underlying = inputs;
+    private ArrayFixed(T... initial) {
+        this.underlying = initial;
     }
 
-    public static <T> Array<T> apply(T... inputs) {
-        return new Array<T>(inputs);
+    public static <T> ArrayFixed<T> fill(T... initial) {
+        return new ArrayFixed<T>(initial);
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T> ArrayFixed<T> fill(int size) {
+        return ArrayFixed.fill((T[]) new Object[size]);
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T> ArrayFixed<T> merge(Array<T> ones, Array<T> twos) {
+        var tmp = (T[]) new Object[ones.getLength() + twos.getLength()];
+        for (var i = 0; i < ones.getLength(); i++) {
+            tmp[i] = ones.get(i).get();
+        }
+        for (var i = 0; i < twos.getLength(); i++) {
+            tmp[i + ones.getLength()] = twos.get(i).get();
+        }
+        return ArrayFixed.fill(tmp);
+    }
+
+    @SuppressWarnings("unchecked")
+    private T[] narrow() {
+        return (T[]) this.underlying;
+    }
+
+    @Override
+    public int getLength() {
+        return this.underlying.length;
     }
 
     @Override
     public Option<T> get(int index) {
         return this.underlying[index] == null
                 ? None.apply()
-                : Some.apply(this.underlying[index]);
+                : Some.apply(narrow()[index]);
     }
 
     @Override
-    public Array<T> set(int index, T input) {
+    public ArrayFixed<T> set(int index, T input) {
         this.underlying[index] = input;
         return this;
     }
 
     @Override
-    public Array<T> remove(int index) {
+    public ArrayFixed<T> clear(int index) {
         this.underlying[index] = null;
         return this;
     }
 
+    @Override
     @SuppressWarnings("unchecked")
-    public Array<T> doubled() {
-        var tmp = (T[]) new Object[this.underlying.length * 2];
-        for (var i = 0; i < this.underlying.length; i++) {
-            tmp[i] = this.underlying[i];
-        }
-        this.underlying = tmp;
-        return this;
-    }
-
-    @SuppressWarnings("unchecked")
-    public <R> Array<R> map(Function<T, R> mapper) {
+    public <R> ArrayFixed<R> map(Function<T, R> mapper) {
         R[] tmp = (R[]) new Object[this.underlying.length];
         for (var i = 0; i < tmp.length; i++) {
-            if (this.get(i) instanceof Some<?>) {
+            if (this.get(i).isPresent()) {
                 tmp[i] = mapper.apply(this.get(i).get());
             }
         }
-        return new Array(tmp);
+        return new ArrayFixed<R>(tmp);
     }
 
 }
