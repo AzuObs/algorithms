@@ -11,7 +11,7 @@ public class Nil<T> implements List<T> {
     private Nil() {}
 
     @SuppressWarnings("unchecked")
-    public static <T> Nil<T> apply() {
+    public static <T> Nil<T> pure() {
         return (Nil<T>) Nil.INSTANCE;
     }
 
@@ -36,12 +36,12 @@ public class Nil<T> implements List<T> {
     }
 
     @Override
-    public List<T> push(T element) {
+    public List<T> prepend(T element) {
         return Cons.apply(element, this);
     }
 
     @Override
-    public List<T> pop() {
+    public List<T> dropHead() {
         return this;
     }
 
@@ -52,6 +52,6 @@ public class Nil<T> implements List<T> {
 
     @Override
     public <R> List<R> map(Function<T, R> mapper) {
-        return Nil.<R>apply();
+        return Nil.<R>pure();
     }
 }
