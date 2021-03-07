@@ -1,4 +1,4 @@
-package com.algorithms.collections.option;
+package com.algorithms.controls.option;
 
 import java.util.function.Function;
 
