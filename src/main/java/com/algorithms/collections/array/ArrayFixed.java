@@ -17,13 +17,21 @@ public class ArrayFixed<T> implements Array<T> {
         this.underlying = initial;
     }
 
+    @SuppressWarnings("unchecked")
+    public static <T> ArrayFixed<T> fill(int size) {
+        return ArrayFixed.fill((T[]) new Object[size]);
+    }
+
     public static <T> ArrayFixed<T> fill(T... initial) {
         return new ArrayFixed<T>(initial);
     }
 
-    @SuppressWarnings("unchecked")
-    public static <T> ArrayFixed<T> fill(int size) {
-        return ArrayFixed.fill((T[]) new Object[size]);
+    public static <T> ArrayFixed<T> fill(T element, int size) {
+        var array = ArrayFixed.<T>fill(size);
+        for (var i = 0; i < size; i++) {
+            array.set(i, element);
+        }
+        return array;
     }
 
     @SuppressWarnings("unchecked")
@@ -50,14 +58,18 @@ public class ArrayFixed<T> implements Array<T> {
 
     @Override
     public Option<T> get(int index) {
-        return this.underlying[index] == null
+        if (index < this.underlying.length) {
+            return this.underlying[index] == null
                 ? None.apply()
                 : Some.apply(narrow()[index]);
+        } else {
+            return None.apply();
+        }
     }
 
     @Override
-    public ArrayFixed<T> set(int index, T input) {
-        this.underlying[index] = input;
+    public ArrayFixed<T> set(int index, T element) {
+        this.underlying[index] = element;
         return this;
     }
 
@@ -68,15 +80,22 @@ public class ArrayFixed<T> implements Array<T> {
     }
 
     @Override
+    public boolean contains(T element) {
+        for (Object entry: this.underlying) {
+            if (entry.equals(element)) return true;
+        }
+        return false;
+    }
+
+    @Override
     @SuppressWarnings("unchecked")
     public <R> ArrayFixed<R> map(Function<T, R> mapper) {
         R[] tmp = (R[]) new Object[this.underlying.length];
         for (var i = 0; i < tmp.length; i++) {
-            if (this.get(i).isPresent()) {
+            if (this.get(i).exists()) {
                 tmp[i] = mapper.apply(this.get(i).get());
             }
         }
         return new ArrayFixed<R>(tmp);
     }
-
 }

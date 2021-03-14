@@ -8,7 +8,6 @@ import com.algorithms.controls.option.Option;
 public interface ArrayList<T> {
     boolean isEmpty();
     Option<T> get(int index);
-    ArrayList<T> push(T value);
+    ArrayList<T> push(T element);
     ArrayList<T> pop(int index);
-
 }

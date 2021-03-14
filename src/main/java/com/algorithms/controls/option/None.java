@@ -23,7 +23,7 @@ public class None<T> implements Option<T> {
     }
 
     @Override
-    public boolean isPresent() {
+    public boolean exists() {
         return false;
     }
 

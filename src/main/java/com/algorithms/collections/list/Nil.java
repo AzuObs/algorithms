@@ -3,6 +3,7 @@ package com.algorithms.collections.list;
 import com.algorithms.controls.option.None;
 import com.algorithms.controls.option.Option;
 
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class Nil<T> implements List<T> {
@@ -11,7 +12,7 @@ public class Nil<T> implements List<T> {
     private Nil() {}
 
     @SuppressWarnings("unchecked")
-    public static <T> Nil<T> pure() {
+    public static <T> Nil<T> apply() {
         return (Nil<T>) Nil.INSTANCE;
     }
 
@@ -51,7 +52,27 @@ public class Nil<T> implements List<T> {
     }
 
     @Override
+    public List<T> concat(List<T> other) {
+        return other;
+    }
+
+    @Override
+    public boolean contains(T element) {
+        return false;
+    }
+
+    @Override
     public <R> List<R> map(Function<T, R> mapper) {
-        return Nil.<R>pure();
+        return Nil.<R>apply();
+    }
+
+    @Override
+    public <R> List<R> flatMap(Function<T, List<R>> mapper) {
+        return Nil.<R>apply();
+    }
+
+    @Override
+    public List<T> forEach(Consumer<T> task) {
+        return Nil.<T>apply();
     }
 }

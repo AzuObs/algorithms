@@ -24,12 +24,26 @@ public class Some<T> implements Option<T> {
     }
 
     @Override
-    public boolean isPresent() {
+    public boolean exists() {
         return true;
     }
 
     @Override
     public boolean isEmpty() {
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return underlying.hashCode();
+    }
+    
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof Some<?>) {
+            return this.get().equals(((Some<?>)other).get());
+        } else {
+            return false;
+        }
     }
 }

@@ -16,7 +16,7 @@ public class ArrayListDynamic<T> implements ArrayList<T> {
         this.underlying = ArrayFixed.fill(initial.getLength() * 2);
         this.population = 0;
         for (var i = 0; i < initial.getLength(); i++) {
-            if (initial.get(i).isPresent()) {
+            if (initial.get(i).exists()) {
                 this.underlying.set(i, initial.get(1).get());
                 this.population++;
             }
