@@ -75,6 +75,17 @@ public class Cons<T> implements List<T> {
     }
 
     @Override
+    public boolean none(Function<T, Boolean> predicate) {
+        return !this.any(predicate);
+    }
+
+    @Override
+    public boolean any(Function<T, Boolean> predicate) {
+        var some = this.flatMap(element -> predicate.apply(element) ? Cons.apply(element, Nil.apply()) : Nil.apply());
+        return !some.isEmpty();
+    }
+
+    @Override
     public boolean contains(T element) {
         return containsInner(element, this).run();
     }

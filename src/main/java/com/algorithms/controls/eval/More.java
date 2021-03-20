@@ -13,7 +13,6 @@ public class More<T> extends Eval<T> {
         return new More<T>(computation);
     }
 
-    @Override
     protected Eval<T> get() {
         return computation.get();
     }
@@ -23,7 +22,7 @@ public class More<T> extends Eval<T> {
         Eval<T> result = this.get();
         // this will always be More<T>
         while (result instanceof More<?>) {
-            result = result.get();
+            result = ((More<T>) result).get();
         }
         // this will always be Done<T>
         return result.run();

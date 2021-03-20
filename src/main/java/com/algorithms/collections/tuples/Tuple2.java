@@ -9,13 +9,25 @@ public class Tuple2<K, V> {
         this.value = value;
     }
 
-    private static <K, V> Tuple2<K, V> apply(K key, V value) {
+    public static <K, V> Tuple2<K, V> apply(K key, V value) {
         return new Tuple2(key, value);
+    }
+
+    public K getKey() {
+        return this.key;
+    }
+
+    public V getValue() {
+        return this.value;
     }
 
     @Override
     public int hashCode() {
-        return key.hashCode() + value.hashCode();
+        var R = 31;
+        var hash = 1;
+        hash = R * hash + key.hashCode();
+        hash = R * hash + value.hashCode();
+        return hash;
     }
 
     @Override

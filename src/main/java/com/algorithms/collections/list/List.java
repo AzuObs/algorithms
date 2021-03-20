@@ -17,6 +17,8 @@ public interface List<T> {
     List<T> dropHead();
     List<T> reverse();
     List<T> concat(List<T> other);
+    boolean none(Function<T, Boolean> predicate);
+    boolean any(Function<T, Boolean> predicate);
     boolean contains(T element);
     <R> List<R> map(Function<T, R> mapper);
     <R> List<R> flatMap(Function<T, List<R>> mapper);

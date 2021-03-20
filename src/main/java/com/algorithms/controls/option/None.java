@@ -3,7 +3,7 @@ package com.algorithms.controls.option;
 import java.util.function.Function;
 
 public class None<T> implements Option<T> {
-    private static final None<?> INSTANCE = new None<>();
+    public static final None<?> INSTANCE = new None<>();
 
     private None() { }
 
@@ -18,8 +18,9 @@ public class None<T> implements Option<T> {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public <R> Option<R> map(Function<T, R> mapper) {
-        return new None<R>();
+        return (Option<R>) None.INSTANCE;
     }
 
     @Override

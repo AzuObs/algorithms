@@ -5,6 +5,5 @@ package com.algorithms.controls.eval;
  * stack-safe recursion.
  */
 public abstract class Eval<T> {
-    protected abstract Eval<T> get();
     public abstract T run();
 }

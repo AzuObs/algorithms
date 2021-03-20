@@ -15,7 +15,7 @@ public class Some<T> implements Option<T> {
 
     @Override
     public <R> Option<R> map(Function<T, R> mapper) {
-        return null;
+        return Some.apply(mapper.apply(this.get()));
     }
 
     @Override

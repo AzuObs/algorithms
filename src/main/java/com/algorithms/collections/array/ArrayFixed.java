@@ -4,6 +4,7 @@ import com.algorithms.controls.option.None;
 import com.algorithms.controls.option.Option;
 import com.algorithms.controls.option.Some;
 
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 /*
@@ -97,5 +98,14 @@ public class ArrayFixed<T> implements Array<T> {
             }
         }
         return new ArrayFixed<R>(tmp);
+    }
+
+    @Override
+    public ArrayFixed<T> forEach(Consumer<T> doer) {
+        this.map(n -> {
+            doer.accept(n);
+            return n;
+        });
+        return this;
     }
 }

@@ -57,6 +57,16 @@ public class Nil<T> implements List<T> {
     }
 
     @Override
+    public boolean none(Function<T, Boolean> predicate) {
+        return !this.any(predicate);
+    }
+
+    @Override
+    public boolean any(Function<T, Boolean> predicate) {
+        return false;
+    }
+
+    @Override
     public boolean contains(T element) {
         return false;
     }

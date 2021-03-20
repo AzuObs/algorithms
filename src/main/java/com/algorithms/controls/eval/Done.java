@@ -15,9 +15,4 @@ public class Done<T> extends Eval<T> {
     public T run() {
         return this.underlying;
     }
-
-    @Override
-    protected Eval<T> get() {
-        return this;
-    }
 }

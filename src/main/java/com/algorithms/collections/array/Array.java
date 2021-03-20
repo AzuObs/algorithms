@@ -2,6 +2,7 @@ package com.algorithms.collections.array;
 
 import com.algorithms.controls.option.Option;
 
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 /**
@@ -12,6 +13,7 @@ public interface Array<T> {
     Option<T> get(int index);
     Array<T> set(int index, T element);
     Array<T> clear(int index);
-    boolean contains(T element);
+    Array<T> forEach(Consumer<T> doer);
     <R> Array<R> map(Function<T, R> mapper);
+    boolean contains(T element);
 }
