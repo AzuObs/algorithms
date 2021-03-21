@@ -75,31 +75,40 @@ public class Cons<T> implements List<T> {
     }
 
     @Override
+    public List<T> find(Function<T, Boolean> predicate) {
+        return this.flatMap(element -> predicate.apply(element) ? Cons.apply(element, Nil.apply()) : Nil.apply());
+    }
+
+    @Override
     public boolean none(Function<T, Boolean> predicate) {
-        return !this.any(predicate);
+        return this.find(predicate).isEmpty();
     }
 
     @Override
     public boolean any(Function<T, Boolean> predicate) {
-        var some = this.flatMap(element -> predicate.apply(element) ? Cons.apply(element, Nil.apply()) : Nil.apply());
-        return !some.isEmpty();
+        return !this.none(predicate);
     }
 
     @Override
     public boolean contains(T element) {
-        return containsInner(element, this).run();
+        return this.contains(element::equals);
     }
 
-    private Eval<Boolean> containsInner(T element, List<T> elements) {
+    @Override
+    public boolean contains(Function<T, Boolean> predicate) {
+        return containsInner(predicate, this).run();
+    }
+
+    private Eval<Boolean> containsInner(Function<T, Boolean> predicate, List<T> elements) {
         if (elements.isEmpty()) {
             return Done.apply(false);
         } else {
             return More.apply(() -> {
-                var head = elements.getHead();
-                if (element.equals(head)) {
+                var head = elements.getHead().get();
+                if (predicate.apply(head)) {
                     return Done.apply(true);
                 } else {
-                    return containsInner(element, elements.getTail());
+                    return containsInner(predicate, elements.getTail());
                 }
             });
         }
@@ -112,6 +121,21 @@ public class Cons<T> implements List<T> {
             return More.apply(() -> reverseInner(from.getTail(), Cons.apply(from.getHead().get(), to)));
         }
     }
+
+    @Override
+    public List<T> remove(T element) {
+        return this.remove(element::equals);
+    }
+
+    @Override
+    public List<T> remove(Function<T, Boolean> predicate) {
+        return this.flatMap(element ->
+                predicate.apply(element)
+                        ? Nil.<T>apply()
+                        : Cons.apply(element, Nil.<T>apply())
+        );
+    }
+
 
     @Override
     public <R> List<R> map(Function<T, R> mapper) {

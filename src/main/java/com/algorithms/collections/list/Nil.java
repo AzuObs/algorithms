@@ -62,6 +62,11 @@ public class Nil<T> implements List<T> {
     }
 
     @Override
+    public List<T> find(Function<T, Boolean> predicate) {
+        return this;
+    }
+
+    @Override
     public boolean any(Function<T, Boolean> predicate) {
         return false;
     }
@@ -70,6 +75,17 @@ public class Nil<T> implements List<T> {
     public boolean contains(T element) {
         return false;
     }
+
+    @Override
+    public boolean contains(Function<T, Boolean> predicate) {
+        return false;
+    }
+
+    @Override
+    public List<T> remove(T element) { return this; }
+
+    @Override
+    public List<T> remove(Function<T, Boolean> predicate) { return this; }
 
     @Override
     public <R> List<R> map(Function<T, R> mapper) {
