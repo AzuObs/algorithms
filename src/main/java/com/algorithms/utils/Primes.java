@@ -8,6 +8,8 @@ import com.algorithms.controls.eval.Eval;
 import com.algorithms.controls.eval.More;
 
 public class Primes {
+    public static int THIRTY_ONE = 31;
+
     public static int nextPrime(int after) {
         return nextPrimeInner(Cons.apply(2, Nil.apply()), after, 3).run();
     }

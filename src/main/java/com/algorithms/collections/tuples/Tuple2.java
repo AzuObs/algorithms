@@ -1,5 +1,7 @@
 package com.algorithms.collections.tuples;
 
+import com.algorithms.utils.Primes;
+
 public class Tuple2<K, V> {
     public final K key;
     public final V value;
@@ -10,7 +12,7 @@ public class Tuple2<K, V> {
     }
 
     public static <K, V> Tuple2<K, V> apply(K key, V value) {
-        return new Tuple2(key, value);
+        return new Tuple2<K, V>(key, value);
     }
 
     public K getKey() {
@@ -18,12 +20,13 @@ public class Tuple2<K, V> {
     }
 
     public V getValue() {
-        return this.value;
+        return this.getValue();
     }
 
+    // Horner's method
     @Override
     public int hashCode() {
-        var R = 31;
+        var R = Primes.THIRTY_ONE;
         var hash = 1;
         hash = R * hash + key.hashCode();
         hash = R * hash + value.hashCode();

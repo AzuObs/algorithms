@@ -136,6 +136,6 @@ public class MapHashProbe<K, V> implements Map<K, V> {
     }
 
     private int hash(ArrayFixed<?> space, K key) {
-        return Math.abs(key.hashCode()) % space.getLength();
+        return (key.hashCode() & 0x7fffffff) % space.getLength();
     }
 }
