@@ -1,6 +1,6 @@
 package com.algorithms.searches.substrings;
 
-import com.algorithms.controls.option.Option;
+import com.algorithms.controls.Option;
 
 public interface SubstringSearch {
     Option<String> find(String searchSpace, String substring);

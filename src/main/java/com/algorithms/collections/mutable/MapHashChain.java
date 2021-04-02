@@ -1,10 +1,8 @@
-package com.algorithms.collections.map;
+package com.algorithms.collections.mutable;
 
-import com.algorithms.collections.array.ArrayFixed;
-import com.algorithms.collections.list.Cons;
-import com.algorithms.collections.list.List;
-import com.algorithms.collections.tuples.Tuple2;
-import com.algorithms.controls.option.Option;
+import com.algorithms.collections.immutable.List;
+import com.algorithms.utils.tuples.Tuple2;
+import com.algorithms.controls.Option;
 import com.algorithms.utils.Primes;
 
 public class MapHashChain<K, V> implements Map<K, V> {
@@ -54,7 +52,7 @@ public class MapHashChain<K, V> implements Map<K, V> {
         var chain = this.underlying.get(hash).get();
 
         if (!chain.contains(element)) {
-            this.underlying.set(hash, Cons.apply(element, chain));
+            this.underlying.set(hash, List.cons(element, chain));
             this.population++;
         }
         return this.rehash();

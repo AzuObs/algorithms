@@ -1,14 +1,13 @@
-package com.algorithms.collections.arraylist;
+package com.algorithms.collections.mutable;
 
-import com.algorithms.collections.array.ArrayFixed;
-import com.algorithms.controls.option.Option;
+import com.algorithms.controls.Option;
 
-public class ArrayListDynamic<T> implements ArrayList<T> {
+public class ArrayList<T> implements List<T> {
     private ArrayFixed<T> underlying;
     private int population;
 
     @SuppressWarnings("unchecked")
-    private ArrayListDynamic(ArrayFixed<T> initial) {
+    private ArrayList(ArrayFixed<T> initial) {
         grow(initial);
     }
 
@@ -23,8 +22,8 @@ public class ArrayListDynamic<T> implements ArrayList<T> {
         }
     }
 
-    public static <T> ArrayListDynamic<T> apply(T... initial) {
-        return new ArrayListDynamic<T>(ArrayFixed.fill(initial));
+    public static <T> ArrayList<T> apply(T... initial) {
+        return new ArrayList<T>(ArrayFixed.fill(initial));
     }
 
     @Override
@@ -38,7 +37,7 @@ public class ArrayListDynamic<T> implements ArrayList<T> {
     }
 
     @Override
-    public ArrayListDynamic<T> push(T element) {
+    public ArrayList<T> push(T element) {
         if (this.population == this.underlying.getLength()) {
             grow(this.underlying);
         }
@@ -48,7 +47,7 @@ public class ArrayListDynamic<T> implements ArrayList<T> {
     }
 
     @Override
-    public ArrayListDynamic<T> pop(int index) {
+    public ArrayList<T> pop(int index) {
         this.underlying.set(this.population - 1, null);
         this.population--;
         return this;

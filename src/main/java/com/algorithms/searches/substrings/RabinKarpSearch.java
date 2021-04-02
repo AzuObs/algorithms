@@ -1,14 +1,9 @@
 package com.algorithms.searches.substrings;
 
-import com.algorithms.collections.list.Cons;
-import com.algorithms.collections.list.List;
-import com.algorithms.collections.list.Nil;
-import com.algorithms.collections.tuples.Tuple2;
-import com.algorithms.controls.eval.Done;
-import com.algorithms.controls.eval.Eval;
-import com.algorithms.controls.eval.More;
-import com.algorithms.controls.option.None;
-import com.algorithms.controls.option.Option;
+import com.algorithms.collections.immutable.List;
+import com.algorithms.utils.tuples.Tuple2;
+import com.algorithms.controls.Eval;
+import com.algorithms.controls.Option;
 import com.algorithms.utils.Primes;
 
 public class RabinKarpSearch implements SubstringSearch {
@@ -21,10 +16,10 @@ public class RabinKarpSearch implements SubstringSearch {
 
     @Override
     public Option<String> find(String searchSpace, String substring) {
-        if (searchSpace.length() < substring.length()) return None.apply();
-        if (substring.equals("")) return None.apply();
+        if (searchSpace.length() < substring.length()) return Option.none();
+        if (substring.equals("")) return Option.none();
 
-        var hashedSpace = rabinRollingHash(searchSpace, substring.length(), 0, Nil.apply()).run();
+        var hashedSpace = rabinRollingHash(searchSpace, substring.length(), 0, List.nil()).run();
         var hashedSub = rabinHash(substring);
 
         return hashedSpace.find(element -> element.value.equals(hashedSub.value) && element.key.equals(hashedSub.key))
@@ -40,18 +35,18 @@ public class RabinKarpSearch implements SubstringSearch {
     ) {
         // exit condition
         if (index > searchSpace.length() - substringSize) {
-            return Done.apply(result.reverse());
+            return Eval.done(result.reverse());
         }
         // base case is special
         else if (index == 0) {
-            return More.apply(() -> {
+            return Eval.more(() -> {
                 var head = rabinHash(searchSpace.substring(0, substringSize));
-                return rabinRollingHash(searchSpace, substringSize, index + 1, Cons.apply(head, result));
+                return rabinRollingHash(searchSpace, substringSize, index + 1, List.cons(head, result));
             });
         }
         // calculate new hash based on Rabin's rolling hash algorithm
         else {
-            return More.apply(() -> {
+            return Eval.more(() -> {
                 var previousHash = result.getHead().get().value;
                 var hash =
                         (previousHash - searchSpace.charAt(index - 1)
@@ -59,7 +54,7 @@ public class RabinKarpSearch implements SubstringSearch {
                                 * Primes.THIRTY_ONE
                                 + searchSpace.charAt(index + substringSize - 1);
                 var head = Tuple2.apply(searchSpace.substring(index, index + substringSize), hash);
-                return rabinRollingHash(searchSpace, substringSize, index + 1, Cons.apply(head, result));
+                return rabinRollingHash(searchSpace, substringSize, index + 1, List.cons(head, result));
             });
         }
     }
@@ -82,9 +77,9 @@ public class RabinKarpSearch implements SubstringSearch {
 
     private static Eval<Integer> powInner(int of, int exponent, int at, int result) {
         if (at == exponent) {
-            return Done.apply(result);
+            return Eval.done(result);
         } else {
-            return More.apply(() -> powInner(of, exponent, at + 1, result * of));
+            return Eval.more(() -> powInner(of, exponent, at + 1, result * of));
         }
     }
 }

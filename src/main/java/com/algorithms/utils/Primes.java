@@ -1,17 +1,13 @@
 package com.algorithms.utils;
 
-import com.algorithms.collections.list.Cons;
-import com.algorithms.collections.list.List;
-import com.algorithms.collections.list.Nil;
-import com.algorithms.controls.eval.Done;
-import com.algorithms.controls.eval.Eval;
-import com.algorithms.controls.eval.More;
+import com.algorithms.collections.immutable.List;
+import com.algorithms.controls.Eval;
 
 public class Primes {
     public static int THIRTY_ONE = 31;
 
     public static int nextPrime(int after) {
-        return nextPrimeInner(Cons.apply(2, Nil.apply()), after, 3).run();
+        return nextPrimeInner(List.cons(2, List.nil()), after, 3).run();
     }
 
     // daniel extract into memoized utility
@@ -19,11 +15,11 @@ public class Primes {
         var isPrime = primes.none(prime -> candidate == prime || candidate % prime == 0);
 
         if (isPrime && candidate > after) {
-            return Done.apply(candidate);
+            return Eval.done(candidate);
         } else if (isPrime) {
-            return More.apply(() -> nextPrimeInner(Cons.apply(candidate, primes), after, candidate + 1));
+            return Eval.more(() -> nextPrimeInner(List.cons(candidate, primes), after, candidate + 1));
         } else {
-            return More.apply(() -> nextPrimeInner(primes, after, candidate + 1));
+            return Eval.more(() -> nextPrimeInner(primes, after, candidate + 1));
         }
     }
 }

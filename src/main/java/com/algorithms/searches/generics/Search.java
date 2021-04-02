@@ -1,6 +1,6 @@
 package com.algorithms.searches.generics;
 
-import com.algorithms.controls.option.Option;
+import com.algorithms.controls.Option;
 
 import java.util.function.Function;
 

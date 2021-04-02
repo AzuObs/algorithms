@@ -1,6 +1,6 @@
-package com.algorithms.collections.cache;
+package com.algorithms.collections.mutable;
 
-import com.algorithms.controls.option.Option;
+import com.algorithms.controls.Option;
 
 // daniel
 public interface Cache<T> {

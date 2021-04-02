@@ -1,9 +1,7 @@
-package com.algorithms.collections.set;
+package com.algorithms.collections.mutable;
 
-import com.algorithms.collections.map.MapHashProbe;
-import com.algorithms.collections.tuples.Tuple2;
-import com.algorithms.controls.option.None;
-import com.algorithms.controls.option.Option;
+import com.algorithms.utils.tuples.Tuple2;
+import com.algorithms.controls.Option;
 
 public class SetHashProbe<T> implements Set<T> {
     private final MapHashProbe<T, Option<?>> underlying;
@@ -43,7 +41,7 @@ public class SetHashProbe<T> implements Set<T> {
     }
 
     private Tuple2<T, Option<?>> tuplize(T element) {
-        return Tuple2.apply(element, None.apply());
+        return Tuple2.apply(element, Option.none());
     }
 
     private T detuplize(Tuple2<T, Option<?>> tuple) { return tuple.key; }

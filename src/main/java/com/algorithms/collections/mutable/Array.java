@@ -1,6 +1,6 @@
-package com.algorithms.collections.array;
+package com.algorithms.collections.mutable;
 
-import com.algorithms.controls.option.Option;
+import com.algorithms.controls.Option;
 
 import java.util.function.Consumer;
 import java.util.function.Function;

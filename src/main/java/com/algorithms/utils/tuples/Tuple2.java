@@ -1,8 +1,8 @@
-package com.algorithms.collections.tuples;
+package com.algorithms.utils.tuples;
 
 import com.algorithms.utils.Primes;
 
-public class Tuple2<K, V> {
+public class Tuple2<K, V> implements Tuple {
     public final K key;
     public final V value;
 

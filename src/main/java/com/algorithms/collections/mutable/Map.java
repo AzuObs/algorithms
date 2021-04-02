@@ -1,7 +1,7 @@
-package com.algorithms.collections.map;
+package com.algorithms.collections.mutable;
 
-import com.algorithms.collections.tuples.Tuple2;
-import com.algorithms.controls.option.Option;
+import com.algorithms.utils.tuples.Tuple2;
+import com.algorithms.controls.Option;
 
 public interface Map<K, V> {
     int getLength();

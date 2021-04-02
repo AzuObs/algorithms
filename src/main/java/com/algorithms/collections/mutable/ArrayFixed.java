@@ -1,8 +1,6 @@
-package com.algorithms.collections.array;
+package com.algorithms.collections.mutable;
 
-import com.algorithms.controls.option.None;
-import com.algorithms.controls.option.Option;
-import com.algorithms.controls.option.Some;
+import com.algorithms.controls.Option;
 
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -61,10 +59,10 @@ public class ArrayFixed<T> implements Array<T> {
     public Option<T> get(int index) {
         if (index < this.underlying.length) {
             return this.underlying[index] == null
-                ? None.apply()
-                : Some.apply(narrow()[index]);
+                ? Option.none()
+                : Option.some(narrow()[index]);
         } else {
-            return None.apply();
+            return Option.none();
         }
     }
 

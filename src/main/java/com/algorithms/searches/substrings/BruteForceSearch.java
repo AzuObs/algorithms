@@ -1,11 +1,7 @@
 package com.algorithms.searches.substrings;
 
-import com.algorithms.controls.eval.Done;
-import com.algorithms.controls.eval.Eval;
-import com.algorithms.controls.eval.More;
-import com.algorithms.controls.option.None;
-import com.algorithms.controls.option.Option;
-import com.algorithms.controls.option.Some;
+import com.algorithms.controls.Eval;
+import com.algorithms.controls.Option;
 
 public class BruteForceSearch implements SubstringSearch {
     private BruteForceSearch() { }
@@ -21,15 +17,15 @@ public class BruteForceSearch implements SubstringSearch {
 
     private Eval<Option<String>> findInner(String searchSpace, String substring, int currentIndex, int runnerIndex) {
         if (substring.isBlank()) {
-            return Done.apply(None.apply());
+            return Eval.done(Option.none());
         } else if (runnerIndex == substring.length()) {
-            return Done.apply(Some.apply(searchSpace.substring(currentIndex, currentIndex + runnerIndex)));
+            return Eval.done(Option.some(searchSpace.substring(currentIndex, currentIndex + runnerIndex)));
         } else if (currentIndex == (searchSpace.length() - substring.length() + 1)) {
-            return Done.apply(None.apply());
+            return Eval.done(Option.none());
         } else if (searchSpace.charAt(currentIndex + runnerIndex) == substring.charAt(runnerIndex)) {
-            return More.apply(() -> findInner(searchSpace, substring, currentIndex, runnerIndex + 1));
+            return Eval.more(() -> findInner(searchSpace, substring, currentIndex, runnerIndex + 1));
         } else {
-            return More.apply(() -> findInner(searchSpace, substring, currentIndex + 1, 0));
+            return Eval.more(() -> findInner(searchSpace, substring, currentIndex + 1, 0));
         }
     }
 }

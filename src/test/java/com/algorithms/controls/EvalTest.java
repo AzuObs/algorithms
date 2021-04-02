@@ -1,8 +1,5 @@
 package com.algorithms.controls;
 
-import com.algorithms.controls.eval.Done;
-import com.algorithms.controls.eval.Eval;
-import com.algorithms.controls.eval.More;
 import org.junit.Test;
 
 import java.math.BigInteger;
@@ -30,7 +27,7 @@ public class EvalTest {
 
     private Eval<BigInteger> evalAddWhile(BigInteger current, BigInteger total) {
         return current.equals(BigInteger.ONE)
-                ? Done.apply(total)
-                : More.apply(() -> evalAddWhile(current.subtract(BigInteger.ONE), current.add(total)));
+                ? Eval.done(total)
+                : Eval.more(() -> evalAddWhile(current.subtract(BigInteger.ONE), current.add(total)));
     }
 }

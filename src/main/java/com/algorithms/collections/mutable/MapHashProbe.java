@@ -1,10 +1,8 @@
-package com.algorithms.collections.map;
+package com.algorithms.collections.mutable;
 
-import com.algorithms.collections.array.ArrayFixed;
-import com.algorithms.collections.list.Nil;
-import com.algorithms.collections.tuples.Tuple2;
-import com.algorithms.controls.option.None;
-import com.algorithms.controls.option.Option;
+import com.algorithms.collections.immutable.List;
+import com.algorithms.utils.tuples.Tuple2;
+import com.algorithms.controls.Option;
 import com.algorithms.utils.Primes;
 
 public class MapHashProbe<K, V> implements Map<K, V> {
@@ -42,7 +40,7 @@ public class MapHashProbe<K, V> implements Map<K, V> {
                     hash++;
                 }
             } else {
-                return None.apply();
+                return Option.none();
             }
         }
     }
@@ -66,7 +64,7 @@ public class MapHashProbe<K, V> implements Map<K, V> {
             hash = (hash + 1) % this.underlying.getLength();
         }
 
-        var removed = Nil.<Tuple2<K, V>>apply();
+        var removed = List.Nil.<Tuple2<K, V>>apply();
         while(true) {
             var entry = this.underlying.get(hash);
 

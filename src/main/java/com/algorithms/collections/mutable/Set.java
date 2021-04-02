@@ -1,6 +1,6 @@
-package com.algorithms.collections.set;
+package com.algorithms.collections.mutable;
 
-import com.algorithms.controls.option.Option;
+import com.algorithms.controls.Option;
 
 public interface Set<T> {
     int getLength();
