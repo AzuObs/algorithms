@@ -2,12 +2,12 @@ package com.algorithms.collections.mutable;
 
 import com.algorithms.controls.Option;
 
-public class ArrayList<T> implements List<T> {
+public class ListArray<T> implements List<T> {
     private ArrayFixed<T> underlying;
     private int population;
 
     @SuppressWarnings("unchecked")
-    private ArrayList(ArrayFixed<T> initial) {
+    private ListArray(ArrayFixed<T> initial) {
         grow(initial);
     }
 
@@ -22,8 +22,8 @@ public class ArrayList<T> implements List<T> {
         }
     }
 
-    public static <T> ArrayList<T> apply(T... initial) {
-        return new ArrayList<T>(ArrayFixed.fill(initial));
+    public static <T> ListArray<T> apply(T... initial) {
+        return new ListArray<T>(ArrayFixed.fill(initial));
     }
 
     @Override
@@ -37,7 +37,7 @@ public class ArrayList<T> implements List<T> {
     }
 
     @Override
-    public ArrayList<T> push(T element) {
+    public ListArray<T> push(T element) {
         if (this.population == this.underlying.getLength()) {
             grow(this.underlying);
         }
@@ -47,7 +47,7 @@ public class ArrayList<T> implements List<T> {
     }
 
     @Override
-    public ArrayList<T> pop(int index) {
+    public ListArray<T> pop(int index) {
         this.underlying.set(this.population - 1, null);
         this.population--;
         return this;

@@ -3,19 +3,19 @@ package com.algorithms.collections.mutable;
 import com.algorithms.utils.tuples.Tuple2;
 import com.algorithms.controls.Option;
 
-public class SetHashProbe<T> implements Set<T> {
-    private final MapHashProbe<T, Option<?>> underlying;
+public class SetProbe<T> implements Set<T> {
+    private final MapProbe<T, Option<?>> underlying;
 
-    private SetHashProbe(T[] elements) {
-        this.underlying = MapHashProbe.apply();
+    private SetProbe(T[] elements) {
+        this.underlying = MapProbe.apply();
         for (T element: elements) {
             this.underlying.add(this.tuplize(element));
         }
     }
 
     @SafeVarargs
-    public static <T> SetHashProbe<T> apply(T... elements) {
-        return new SetHashProbe<T>(elements);
+    public static <T> SetProbe<T> apply(T... elements) {
+        return new SetProbe<T>(elements);
     }
 
     @Override
@@ -29,13 +29,13 @@ public class SetHashProbe<T> implements Set<T> {
     }
 
     @Override
-    public SetHashProbe<T> remove(T element) {
+    public SetProbe<T> remove(T element) {
         this.underlying.remove(element);
         return this;
     }
 
     @Override
-    public SetHashProbe<T> add(T element) {
+    public SetProbe<T> add(T element) {
         this.underlying.add(this.tuplize(element));
         return this;
     }

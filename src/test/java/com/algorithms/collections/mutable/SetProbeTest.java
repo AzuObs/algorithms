@@ -3,16 +3,16 @@ package com.algorithms.collections.mutable;
 import com.algorithms.controls.Option;
 import org.junit.Test;
 
-public class SetHashProbeTest {
+public class SetProbeTest {
     
     @Test
     public void isApplicative() {
-        SetHashProbe.apply(1, 2, 3);
+        SetProbe.apply(1, 2, 3);
     }
 
     @Test
     public void get() {
-        var set = SetHashProbe.apply(1, 2, 3);
+        var set = SetProbe.apply(1, 2, 3);
         assert set.get(1).equals(Option.some(1));
         assert set.get(2).equals(Option.some(2));
         assert set.get(3).equals(Option.some(3));
@@ -21,7 +21,7 @@ public class SetHashProbeTest {
 
     @Test
     public void add() {
-        var set = SetHashProbe.apply(1, 2, 3);
+        var set = SetProbe.apply(1, 2, 3);
         set.add(5);
         set.add(6);
         set.add(10);
@@ -40,7 +40,7 @@ public class SetHashProbeTest {
 
     @Test
     public void rehashes() {
-        var set = SetHashProbe.apply(1);
+        var set = SetProbe.apply(1);
         set.add(5);
         set.add(6);
         set.add(10);
@@ -57,7 +57,7 @@ public class SetHashProbeTest {
 
     @Test
     public void remove() {
-        var set = SetHashProbe.apply(1, 2, 3, 5, 6, 10);
+        var set = SetProbe.apply(1, 2, 3, 5, 6, 10);
         set.remove(3).remove(4);
         assert set.get(1).equals(Option.some(1));
         assert set.get(2).equals(Option.some(2));

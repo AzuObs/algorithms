@@ -3,19 +3,19 @@ package com.algorithms.collections.mutable;
 import com.algorithms.utils.tuples.Tuple2;
 import com.algorithms.controls.Option;
 
-public class SetHashChain<T> implements Set<T> {
-    private MapHashChain<T, Option<?>> underlying;
+public class SetChain<T> implements Set<T> {
+    private MapChain<T, Option<?>> underlying;
 
-    private SetHashChain(T[] elements) {
-        this.underlying = MapHashChain.<T, Option<?>>apply();
+    private SetChain(T[] elements) {
+        this.underlying = MapChain.<T, Option<?>>apply();
         for (T element: elements) {
             this.underlying.add(this.tuplize(element));
         }
     }
 
     @SafeVarargs
-    public static <T> SetHashChain<T> apply(T... elements) {
-        return new SetHashChain<T>(elements);
+    public static <T> SetChain<T> apply(T... elements) {
+        return new SetChain<T>(elements);
     }
 
     @Override
@@ -29,13 +29,13 @@ public class SetHashChain<T> implements Set<T> {
     }
 
     @Override
-    public SetHashChain<T> remove(T element) {
+    public SetChain<T> remove(T element) {
         this.underlying.remove(element);
         return this;
     }
 
     @Override
-    public SetHashChain<T> add(T element) {
+    public SetChain<T> add(T element) {
         this.underlying.add(this.tuplize(element));
         return this;
     }

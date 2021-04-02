@@ -5,11 +5,11 @@ import com.algorithms.utils.tuples.Tuple2;
 import com.algorithms.controls.Option;
 import com.algorithms.utils.Primes;
 
-public class MapHashChain<K, V> implements Map<K, V> {
+public class MapChain<K, V> implements Map<K, V> {
     private ArrayFixed<List<Tuple2<K, V>>> underlying;
     private int population;
 
-    private MapHashChain(Tuple2<K, V>[] elements) {
+    private MapChain(Tuple2<K, V>[] elements) {
         this.underlying = ArrayFixed.fill(List.empty(), Primes.nextPrime(elements.length * 2));
         for (Tuple2<K, V> element: elements) {
             this.add(element);
@@ -17,8 +17,8 @@ public class MapHashChain<K, V> implements Map<K, V> {
     }
 
     @SafeVarargs
-    public static <K, V> MapHashChain<K, V> apply(Tuple2<K, V>... elements) {
-        return new MapHashChain<K, V>(elements);
+    public static <K, V> MapChain<K, V> apply(Tuple2<K, V>... elements) {
+        return new MapChain<K, V>(elements);
     }
 
     @Override
