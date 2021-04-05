@@ -1,10 +1,13 @@
 package com.algorithms.controls;
 
+import com.algorithms.collections.immutable.List;
+
 import java.util.function.Function;
 
 public interface Option<T> {
     T get() throws NullPointerException;
     <R> Option<R> map(Function<T, R> mapper);
+    List<T> toList();
     boolean exists();
     boolean isEmpty();
 
@@ -33,6 +36,11 @@ public interface Option<T> {
         }
 
         @Override
+        public List<T> toList() {
+            return List.nil();
+        }
+
+        @Override
         public boolean exists() {
             return false;
         }
@@ -44,14 +52,14 @@ public interface Option<T> {
     }
 
     class Some<T> implements Option<T> {
-        final T underlying;
+        final T value;
 
-        private Some(T element) {
-            this.underlying = element;
+        private Some(T value) {
+            this.value = value;
         }
 
-        public static <T> Option<T> apply(T element) {
-            return new Some<T>(element);
+        public static <T> Option<T> apply(T value) {
+            return new Some<T>(value);
         }
 
         @Override
@@ -61,7 +69,12 @@ public interface Option<T> {
 
         @Override
         public T get() throws NullPointerException {
-            return underlying;
+            return value;
+        }
+
+        @Override
+        public List<T> toList() {
+            return List.single(value);
         }
 
         @Override
@@ -76,7 +89,7 @@ public interface Option<T> {
 
         @Override
         public int hashCode() {
-            return underlying.hashCode();
+            return value.hashCode();
         }
 
         @Override

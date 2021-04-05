@@ -36,6 +36,7 @@ public interface List<T> {
     static <T> List<T> nil() { return Nil.apply(); }
     static <T> List<T> empty() { return nil(); }
     static <T> List<T> cons(T head, List<T> tail){ return Cons.<T>apply(head, tail); }
+    static <T> List<T> single(T head) { return Cons.apply(head, Nil.apply()); }
 
     class Cons<T> implements List<T> {
         private final T head;
