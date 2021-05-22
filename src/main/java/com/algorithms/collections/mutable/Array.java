@@ -16,4 +16,10 @@ public interface Array<T> {
     Array<T> forEach(Consumer<T> doer);
     <R> Array<R> map(Function<T, R> mapper);
     boolean contains(T element);
+
+    default Array<T> swap(int origin, int target) {
+        var originValue = this.get(origin).orElse(null);
+        this.set(origin, this.get(target).orElse(null));
+        return this.set(target, originValue);
+    }
 }

@@ -6,6 +6,7 @@ import java.util.function.Function;
 
 public interface Option<T> {
     T get() throws NullPointerException;
+    T orElse(T other);
     <R> Option<R> map(Function<T, R> mapper);
     List<T> toList();
     boolean exists();
@@ -27,6 +28,11 @@ public interface Option<T> {
         @Override
         public T get() throws NullPointerException {
             throw new NullPointerException("Can't call .get on None");
+        }
+
+        @Override
+        public T orElse(T other) {
+            return other;
         }
 
         @Override
@@ -69,6 +75,11 @@ public interface Option<T> {
 
         @Override
         public T get() throws NullPointerException {
+            return value;
+        }
+
+        @Override
+        public T orElse(T other) {
             return value;
         }
 

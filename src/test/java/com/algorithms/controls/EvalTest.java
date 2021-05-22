@@ -6,7 +6,7 @@ import java.math.BigInteger;
 
 public class EvalTest {
 
-    private static BigInteger STACK_DEPTH = BigInteger.valueOf(10000000);
+    private static final BigInteger STACK_DEPTH = BigInteger.valueOf(10000000);
 
     @Test(expected = StackOverflowError.class)
     public void nonEvalVersionThrowsStackOverflow() {
@@ -29,5 +29,11 @@ public class EvalTest {
         return current.equals(BigInteger.ONE)
                 ? Eval.done(total)
                 : Eval.more(() -> evalAddWhile(current.subtract(BigInteger.ONE), current.add(total)));
+    }
+
+    // daniel
+    @Test
+    public void repl() {
+
     }
 }
