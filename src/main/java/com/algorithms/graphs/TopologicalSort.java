@@ -16,9 +16,7 @@ public class TopologicalSort {
     this.marked = new boolean[G.V()];
     this.onStack = new boolean[G.V()];
 
-    for (var v = 0; v < G.V(); v++) {
-      if (!marked[v]) sort(v);
-    }
+    for (var v = 0; v < G.V(); v++) sort(v);
   }
 
   private void sort(int v) {
@@ -33,7 +31,7 @@ public class TopologicalSort {
     onStack[v] = false;
   }
 
-  public int[] getSorted() {
+  public int[] get() {
     return sorted;
   }
 }

@@ -11,14 +11,14 @@ public class TopologicalSortTest {
   public void empty() {
     var G = new Graph(0);
     var sort = new TopologicalSort(G);
-    assert Arrays.equals(sort.getSorted(), new int[0]);
+    assert Arrays.equals(sort.get(), new int[0]);
   }
 
   @Test
   public void one() {
     var G = new Graph(1);
     var sort = new TopologicalSort(G);
-    assert Arrays.equals(sort.getSorted(), new int[] { 0 });
+    assert Arrays.equals(sort.get(), new int[] { 0 });
   }
 
   @Test
@@ -27,7 +27,7 @@ public class TopologicalSortTest {
     G.addUnidirectionalEdge(0, 1);
     G.addUnidirectionalEdge(1, 2);
     var sort = new TopologicalSort(G);
-    assert Arrays.equals(sort.getSorted(), new int[] { 0, 1, 2 });
+    assert Arrays.equals(sort.get(), new int[] { 0, 1, 2 });
   }
 
   @Test
@@ -37,7 +37,7 @@ public class TopologicalSortTest {
     G.addUnidirectionalEdge(2, 3);
     G.addUnidirectionalEdge(0, 1);
     var sort = new TopologicalSort(G);
-    assert Arrays.equals(sort.getSorted(), new int[] { 0, 2 , 3, 1 });
+    assert Arrays.equals(sort.get(), new int[] { 0, 2 , 3, 1 });
   }
 
   @Test
@@ -48,7 +48,7 @@ public class TopologicalSortTest {
     G.addUnidirectionalEdge(0, 3);
     G.addUnidirectionalEdge(3, 2);
     var sort = new TopologicalSort(G);
-    assert Arrays.equals(sort.getSorted(), new int[] { 0, 1, 3, 2 });
+    assert Arrays.equals(sort.get(), new int[] { 0, 1, 3, 2 });
   }
 
   @Test
@@ -58,7 +58,7 @@ public class TopologicalSortTest {
     G.addUnidirectionalEdge(1, 2);
     G.addUnidirectionalEdge(3, 2);
     var sort = new TopologicalSort(G);
-    assert Arrays.equals(sort.getSorted(), new int[] { 3, 0, 1, 2 });
+    assert Arrays.equals(sort.get(), new int[] { 3, 0, 1, 2 });
   }
 
   @Test
