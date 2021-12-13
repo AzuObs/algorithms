@@ -29,9 +29,15 @@ public class Graph {
         return this.adjacencies[v];
     }
 
-    public Graph addEdge(int v, int w) {
+    public Graph addBidirectionalEdge(int v, int w) {
         this.adjacencies[v] = this.adjacencies[v].prepend(w);
         this.adjacencies[w] = this.adjacencies[w].prepend(v);
+        this.E += 1;
+        return this;
+    }
+
+    public Graph addUnidirectionalEdge(int v, int w) {
+        this.adjacencies[v] = this.adjacencies[v].prepend(w);
         this.E += 1;
         return this;
     }
