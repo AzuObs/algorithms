@@ -1,4 +1,4 @@
-package com.algorithms.puzzles;
+package com.algorithms.puzzles.ctci;
 
 import java.util.LinkedList;
 import java.util.NoSuchElementException;

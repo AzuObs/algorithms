@@ -1,4 +1,4 @@
-package com.algorithms.puzzles;
+package com.algorithms.puzzles.ctci;
 
 public class MinimalTree {
   public static class Node {

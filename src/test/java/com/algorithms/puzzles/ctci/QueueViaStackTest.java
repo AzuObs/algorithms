@@ -1,4 +1,4 @@
-package com.algorithms.puzzles;
+package com.algorithms.puzzles.ctci;
 
 import org.junit.Test;
 

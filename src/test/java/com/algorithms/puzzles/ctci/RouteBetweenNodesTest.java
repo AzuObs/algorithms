@@ -1,7 +1,7 @@
-package com.algorithms.puzzles;
+package com.algorithms.puzzles.ctci;
 
 import org.junit.Test;
-import com.algorithms.puzzles.RouteBetweenNodes.*;
+import com.algorithms.puzzles.ctci.RouteBetweenNodes.*;
 
 public class RouteBetweenNodesTest {
 

@@ -1,4 +1,4 @@
-package com.algorithms.puzzles;
+package com.algorithms.puzzles.ctci;
 
 public class FizzBuzz {
     public static String classify(int n) {

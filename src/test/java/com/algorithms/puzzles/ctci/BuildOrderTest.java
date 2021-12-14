@@ -1,4 +1,4 @@
-package com.algorithms.puzzles;
+package com.algorithms.puzzles.ctci;
 
 import com.algorithms.utils.tuples.Tuple2;
 import org.junit.Test;

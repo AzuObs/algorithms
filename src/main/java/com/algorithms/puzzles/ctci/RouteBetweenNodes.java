@@ -1,4 +1,4 @@
-package com.algorithms.puzzles;
+package com.algorithms.puzzles.ctci;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;

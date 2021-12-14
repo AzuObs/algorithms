@@ -1,6 +1,6 @@
-package com.algorithms.puzzles;
+package com.algorithms.puzzles.ctci;
 
-import com.algorithms.puzzles.PathsWithSum.Node;
+import com.algorithms.puzzles.ctci.PathsWithSum.Node;
 import org.junit.Test;
 
 public class PathsWithSumTest {

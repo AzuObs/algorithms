@@ -1,4 +1,4 @@
-package com.algorithms.puzzles;
+package com.algorithms.puzzles.ctci;
 
 import com.algorithms.collections.mutable.Graph;
 import com.algorithms.graphs.TopologicalSort;
