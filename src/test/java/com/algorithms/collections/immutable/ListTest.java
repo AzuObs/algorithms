@@ -42,6 +42,13 @@ public class ListTest {
         assert mapped.getHead().equals(Option.some(2));
     }
 
+    @Test
+    public void equals() {
+        assert List.nil().equals(List.nil());
+        assert List.single(1).hashCode() == List.single(1).hashCode();
+        assert List.single(1).equals(List.single(1));
+    }
+
     private boolean isEven(int n) {
         return n % 2 == 0;
     }

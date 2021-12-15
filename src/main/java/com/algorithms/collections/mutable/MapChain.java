@@ -3,14 +3,14 @@ package com.algorithms.collections.mutable;
 import com.algorithms.collections.immutable.List;
 import com.algorithms.utils.tuples.Tuple2;
 import com.algorithms.controls.Option;
-import com.algorithms.utils.Primes;
+import com.algorithms.utils.Prime;
 
 public class MapChain<K, V> implements Map<K, V> {
     private ArrayFixed<List<Tuple2<K, V>>> underlying;
     private int population;
 
     private MapChain(Tuple2<K, V>[] elements) {
-        this.underlying = ArrayFixed.fill(List.empty(), Primes.nextPrime(elements.length * 2));
+        this.underlying = ArrayFixed.fill(List.empty(), Prime.nextPrime(elements.length * 2));
         for (Tuple2<K, V> element: elements) {
             this.add(element);
         }
@@ -60,7 +60,7 @@ public class MapChain<K, V> implements Map<K, V> {
 
     private Map<K, V> rehash() {
         if (isTooFull()) {
-            var newLength = Primes.nextPrime(this.underlying.getLength() * 2);
+            var newLength = Prime.nextPrime(this.underlying.getLength() * 2);
             var tmp = ArrayFixed.<List<Tuple2<K, V>>>fill(List.empty(), newLength);
 
             for (var i = 0; i < this.underlying.getLength(); i++) {

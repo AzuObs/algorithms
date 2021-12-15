@@ -4,7 +4,7 @@ import com.algorithms.collections.immutable.List;
 import com.algorithms.utils.tuples.Tuple2;
 import com.algorithms.controls.Eval;
 import com.algorithms.controls.Option;
-import com.algorithms.utils.Primes;
+import com.algorithms.utils.Prime;
 
 public class RabinKarpSearch implements SubstringSearch {
 
@@ -50,8 +50,8 @@ public class RabinKarpSearch implements SubstringSearch {
                 var previousHash = result.getHead().get().value;
                 var hash =
                         (previousHash - searchSpace.charAt(index - 1)
-                                * pow(Primes.THIRTY_ONE, substringSize - 1))
-                                * Primes.THIRTY_ONE
+                                * pow(Prime.THIRTY_ONE, substringSize - 1))
+                                * Prime.THIRTY_ONE
                                 + searchSpace.charAt(index + substringSize - 1);
                 var head = Tuple2.apply(searchSpace.substring(index, index + substringSize), hash);
                 return rabinRollingHash(searchSpace, substringSize, index + 1, List.cons(head, result));
@@ -62,7 +62,7 @@ public class RabinKarpSearch implements SubstringSearch {
     private static Tuple2<String, Integer> rabinHash(String of) {
         var hash = 0;
         for (var i = 0; i < of.length(); i++) {
-            hash = hash * Primes.THIRTY_ONE + of.charAt(i);
+            hash = hash * Prime.THIRTY_ONE + of.charAt(i);
         }
         return Tuple2.apply(of, hash);
     }

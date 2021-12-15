@@ -1,6 +1,6 @@
 package com.algorithms.utils.tuples;
 
-import com.algorithms.utils.Primes;
+import com.algorithms.utils.Prime;
 
 public class Tuple2<K, V> implements Tuple {
     public final K key;
@@ -23,10 +23,10 @@ public class Tuple2<K, V> implements Tuple {
         return this.getValue();
     }
 
-    // Horner's method
+    // Horner method
     @Override
     public int hashCode() {
-        var R = Primes.THIRTY_ONE;
+        var R = Prime.THIRTY_ONE;
         var hash = 1;
         hash = R * hash + key.hashCode();
         hash = R * hash + value.hashCode();

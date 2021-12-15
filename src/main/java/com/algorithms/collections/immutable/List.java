@@ -107,6 +107,24 @@ public interface List<T> {
             return flattenInner(mapped, Nil.apply()).run();
         }
 
+        @Override
+        public int hashCode() {
+            // Horner method
+            return (int)Math.pow(31, length - 1) * head.hashCode() + tail.hashCode();
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if (other instanceof Cons<?>) {
+                var converted = (Cons<?>) other;
+                if (this.getLength() != converted.getLength()) return false;
+                if (!this.getHead().equals(converted.getHead())) return false;
+                return this.getTail().equals(converted.getTail());
+            } else {
+                return false;
+            }
+        }
+
         private <R> Eval<List<R>> mapInner(List<T> from, List<R> to, Function<T, R> mapper) {
             if (from.isEmpty()) {
                 return Eval.done(to.reverse());
@@ -170,6 +188,16 @@ public interface List<T> {
         @Override
         public <R> List<R> flatMap(Function<T, List<R>> mapper) {
             return Nil.<R>apply();
+        }
+
+        @Override
+        public int hashCode() {
+            return 0;
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            return other instanceof Nil;
         }
     }
 }

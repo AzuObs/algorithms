@@ -3,7 +3,7 @@ package com.algorithms.collections.mutable;
 import com.algorithms.collections.immutable.List;
 import com.algorithms.utils.tuples.Tuple2;
 import com.algorithms.controls.Option;
-import com.algorithms.utils.Primes;
+import com.algorithms.utils.Prime;
 
 public class MapProbe<K, V> implements Map<K, V> {
 
@@ -11,7 +11,7 @@ public class MapProbe<K, V> implements Map<K, V> {
     private int population;
 
     private MapProbe(Tuple2<K,V>[] elements) {
-        this.underlying = ArrayFixed.fill(Primes.nextPrime(elements.length * 2));
+        this.underlying = ArrayFixed.fill(Prime.nextPrime(elements.length * 2));
         for (Tuple2<K,V> element: elements) {
             this.add(element);
         }
@@ -105,7 +105,7 @@ public class MapProbe<K, V> implements Map<K, V> {
 
     private MapProbe<K, V> rehash() {
         if (isTooFull()) {
-            var tmp = ArrayFixed.<Tuple2<K, V>>fill(Primes.nextPrime(this.underlying.getLength() * 2));
+            var tmp = ArrayFixed.<Tuple2<K, V>>fill(Prime.nextPrime(this.underlying.getLength() * 2));
 
             for (var i = 0; i < this.underlying.getLength(); i++) {
                 var element = this.underlying.get(i);
