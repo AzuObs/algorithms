@@ -1,6 +1,6 @@
 package com.algorithms.puzzles.ctci;
 
-public class SubArrayMaxSum {
+public class SubArrayMaxSumSequence {
 
   public static int get(int[] arr) {
     var maxSum = Integer.MIN_VALUE;

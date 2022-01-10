@@ -2,7 +2,7 @@ package com.algorithms.puzzles.ctci;
 
 import java.util.HashMap;
 
-public class SubArrayTargetSum {
+public class SubArrayTargetSumSequence {
 
   public static int count(int[] arr, int target) {
     var runningSum = new int[arr.length];
