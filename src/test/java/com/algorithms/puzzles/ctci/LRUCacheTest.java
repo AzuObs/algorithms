@@ -3,7 +3,7 @@ package com.algorithms.puzzles.ctci;
 import org.junit.Test;
 
 public class LRUCacheTest {
-  
+
   @Test
   public void addingElements() {
     var cache = new LRUCache<Character, Integer>(3);
